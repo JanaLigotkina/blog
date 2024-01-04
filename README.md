@@ -1,24 +1,40 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+This is a simple blog application build with Ruby on Rails and PostgreSQL.
 
-* Ruby version
+## Installation
 
-* System dependencies
+1. Clone the repository
 
-* Configuration
+```bash
+git clone https://github.com/JanaLigotkina/blog.git
+```
 
-* Database creation
+2. Install dependencies
 
-* Database initialization
+```bash
+bundle install
+```
 
-* How to run the test suite
+3. Docker
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+docker-compose up
+```
 
-* Deployment instructions
+4.Create and migrate the database
 
-* ...
+```bash
+rails db:create
+rails db:migrate
+```
+
+4. Run the server
+
+```bash
+rails s
+```
+
+
