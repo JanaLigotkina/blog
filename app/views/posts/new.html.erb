@@ -1,18 +1,26 @@
 <h2> Add new post </h2>
 <%= form_for :post, url: posts_path do |f| %>
+  <% if @post.errors.any? %>
+    <% @post.errors.full_messages.each do |msg|  %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+    <% end %>
+  <% end %>
+
   <p>
-    <%= f.label :user_id, 'User id' %><br>
-    <%= f.text_field(:user_id, {:class => 'form-control'}) %>
+    <%= f.label :user_id, 'User id' %>
+    <%= f.text_field(:user_id, {class: 'form-control'}) %>
   </p>
   <p>
-    <%= f.label :title, 'Name' %><br>
-    <%= f.text_field(:title, {:class => 'form-control'}) %>
+    <%= f.label :title, 'Title' %>
+    <%= f.text_field(:title, {class: 'form-control'}) %>
   </p>
   <p>
-    <%= f.label :body, 'Body text' %><br>
-    <%= f.text_area(:body, {:class => 'form-control'}) %>
+    <%= f.label :body, 'Body text' %>
+    <%= f.text_area(:body, {class: 'form-control'}) %>
   </p>
   <p>
-    <%= f.submit({:class => 'btn btn-success'}) %>
+    <%= f.submit({class: 'btn btn-success'}) %>
   </p>
 <% end %>
