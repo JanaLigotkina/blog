@@ -1,1 +1,9 @@
-<h3>General</h3>
+<h3>All Posts</h3>
+
+<% @post.each do |post| %>
+  <h3><%= post.title %></h3>
+  <p><%= post.body %></p>
+  <p><%= link_to "Edit", edit_post_path(post) %></p>
+  <p><%= link_to "Delete", post_path(post), method: :delete %></p>
+  <hr>
+<% end %>

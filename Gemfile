@@ -12,6 +12,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
+gem "twitter-bootstrap-rails"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
