@@ -1,12 +1,16 @@
-<h3>All Posts</h3>
+<h3 class="mb-5">All Posts</h3>
 
 <% @post.each do |post| %>
   <div class="alert alert-success">
     <h3 class="mb-3"><%= post.title %></h3>
-    <p class="mb-3"><%= post.body %></p>
-    <%= link_to "Read more..", post_path(post), class: 'btn btn-default' %>
-    <%= link_to "Edit", edit_post_path(post), class: 'btn btn-default' %>
-    <%= link_to "Delete", post_path(post), method: :delete, class: 'btn btn-default' %>
+    <p class="mb-5"><%= truncate(post.body, length: 100) %></p>
+    <div class="d-flex">
+      <%= link_to "Read more..", post_path(post), class: 'btn btn-default' %>
+      <%= link_to "Edit", edit_post_path(post), class: 'btn btn-warning mx-3' %>
+      <%= button_to "Delete post", post_path(post), method: :delete,
+                  data: {confirm: "You are sure?"}, class: 'btn btn-danger'
+      %>
+    </div>
   </div>
   <hr>
 <% end %>
