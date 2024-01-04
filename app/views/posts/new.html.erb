@@ -1,0 +1,18 @@
+<h2> Add new post </h2>
+<%= form_for :post, url: posts_path do |f| %>
+  <p>
+    <%= f.label :user_id, 'User id' %><br>
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :title, 'Name' %><br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :body, 'Body text' %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
