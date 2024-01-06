@@ -1,4 +1,4 @@
-<div class="p-4 alert-success">
+<div class="p-4 post-bg">
   <h1> <%= @post.title %></h1>
   <p> <%= simple_format(@post.body) %></p>
   <p> <%= @post.user_id %></p>
@@ -6,6 +6,35 @@
   <div class="d-flex">
     <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-warning' %>
     <%= button_to "Delete post", post_path(@post), method: :delete,
-                  data: {confirm: "You are sure?"}, class: 'btn btn-danger mx-3' %>
+                  data:                                    { confirm: "You are sure?" }, class: 'btn btn-danger mx-3' %>
   </div>
 </div>
+<hr>
+
+<h3 class="mb-5">All Comments</h3>
+<div>
+  <% @post.comments.each do |comment| %>
+    <div class="alert post-bg">
+      <div class="d-flex justify-content-between">
+        <p><strong><%= comment.username %></strong>: <%= comment.body %></p>
+        <p><%= comment.created_at.strftime("%d %b. %Y") %></p>
+      </div>
+      <hr>
+    </div>
+  <% end %>
+  </div>
+  <hr>
+  <h2> Add comment </h2>
+  <%= form_for([@post, @post.comments.build]) do |f| %>
+    <p>
+      <%= f.label :username, 'User' %>
+      <%= f.text_field(:username, { class: 'form-control' }) %>
+    </p>
+    <p>
+      <%= f.label :body, 'Comment' %>
+      <%= f.text_area(:body, { class: 'form-control' }) %>
+    </p>
+    <p>
+      <%= f.submit("Add comment", { class: 'btn btn-warning' }) %>
+    </p>
+  <% end %>
