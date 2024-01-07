@@ -22,19 +22,20 @@
       <hr>
     </div>
   <% end %>
-  </div>
-  <hr>
-  <h2> Add comment </h2>
-  <%= form_for([@post, @post.comments.build]) do |f| %>
-    <p>
-      <%= f.label :username, 'User' %>
-      <%= f.text_field(:username, { class: 'form-control' }) %>
-    </p>
-    <p>
-      <%= f.label :body, 'Comment' %>
-      <%= f.text_area(:body, { class: 'form-control' }) %>
-    </p>
-    <p>
-      <%= f.submit("Add comment", { class: 'btn btn-warning' }) %>
-    </p>
-  <% end %>
+</div>
+<hr>
+<h2> Add comment </h2>
+<%= form_with(model: [@post, @post.comments.build], local: true) do |f| %>
+  <p>
+    <%= f.label :username, 'User' %>
+    <%= f.text_field(:username, class: 'form-control') %>
+  </p>
+  <p>
+    <%= f.label :body, 'Comment' %>
+    <%= f.text_area(:body, class: 'form-control') %>
+  </p>
+  <p>
+    <%= f.submit('Add comment', class: 'btn btn-warning') %>
+  </p>
+<% end %>
+
