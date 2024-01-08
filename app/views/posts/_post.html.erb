@@ -1,0 +1,25 @@
+<div>
+  <% posts.each do |post| %>
+    <div class="alert post-bg">
+      <h3 class="mb-3"><%= post.title %></h3>
+      <p class="mb-3">Добавил пост User_id: <%= post.user_id %></p>
+      <p class="mb-5"><%= truncate(post.body, length: 100) %></p>
+      <div class="d-flex justify-content-between align-items-end">
+        <div class="d-flex">
+          <%= link_to "Read more..", post_path(post), class: 'btn btn-default' %>
+          <% if current_user.present? && current_user.id == post.user_id %>
+            <%= link_to "Edit", edit_post_path(post), class: 'btn btn-warning mx-3' %>
+            <%= button_to "Delete post", post_path(post), method: :delete,
+                          data:                                   { confirm: "You are sure?" }, class: 'btn btn-danger'
+            %>
+          <% end %>
+        </div>
+        <div class="d-flex">
+          <%= link_to fa_icon('thumbs-up'), post_path(post), class: "px-3 fs-2" %>
+          <%= link_to fa_icon('thumbs-down'), post_path(post), class: "px-3 fs-2" %>
+          <%= link_to fa_icon('star'), post_path(post), class: "px-3 fs-2" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,7 +1,11 @@
+.body-bg {
+  background-color: rgb(238, 238, 238);
+}
+
 .header-bg {
   background-color: rgba(73, 99, 160, 0.7);
 }
 
 .post-bg {
-  background-color: rgba(73, 99, 160, 0.5);
+  background-color: #F7F7F7;
 }

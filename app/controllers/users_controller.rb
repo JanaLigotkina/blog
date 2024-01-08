@@ -37,6 +37,12 @@ class UsersController < ApplicationController
     redirect_to home_path, notice: 'You have successfully deleted your profile!'
   end
 
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts
+    @post = Post.new(user: @user)
+  end
+
   private
 
   def user_params

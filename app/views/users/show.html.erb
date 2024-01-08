@@ -1,0 +1,16 @@
+<div class="card border-warning text-center">
+  <div class="card-header bg-warning text-white py-3"><%= @user.name %></div>
+  <p class="card-body"><%= "@#{@user.nickname}" %></p>
+</div>
+
+<h3>Posts</h3>
+<% if @posts.size == 0 %>
+  <p>User hasn't written any articles yet <%= fa_icon('pencil') %></p>
+<% else %>
+  <%= render 'posts/post', posts: @posts %>
+<% end %>
+
+<% if current_user.present? && @user == current_user %>
+  <h3 class="mt-5">Create new post</h3>
+  <%= render 'posts/form', post: @post %>
+<% end %>

@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
   def index
-    @post = Post.all
+    @posts = Post.all
   end
 
   def new
-    @post = Post.new
+    @post = Post.new(user: current_user)
   end
 
   def create
@@ -14,6 +14,7 @@ class PostsController < ApplicationController
       flash[:notice] = 'Post was successfully created.'
       redirect_to @post
     else
+      flash.now[:alert] = 'Only registered users can add posts!'
       render 'new'
     end
   end
