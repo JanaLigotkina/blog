@@ -1,13 +1,14 @@
 <div class="p-4 post-bg">
+  <p class="mb-3"><%= "@#{@post.user.nickname}, #{time_ago_in_words(@post.created_at)}" %></p>
   <h2> <%= @post.title %></h2>
   <p> <%= simple_format(@post.body) %></p>
-  <p> <%= @post.user_id %></p>
-  <hr>
-  <div class="d-flex">
-    <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-warning' %>
-    <%= button_to "Delete post", post_path(@post), method: :delete,
-                  data:                                    { confirm: "You are sure?" }, class: 'btn btn-danger mx-3' %>
-  </div>
+  <% if current_user.id == @post.user_id %>
+    <div class="d-flex">
+      <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-warning' %>
+      <%= button_to "Delete post", post_path(@post), method: :delete,
+                    data:                                    { confirm: "You are sure?" }, class: 'btn btn-danger mx-3' %>
+    </div>
+  <% end %>
 </div>
 <hr>
 
