@@ -1,0 +1,41 @@
+<%= form_with(model: user, local: true) do |f| %>
+  <% if user.errors.any? %>
+    <% user.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <p>
+    <%= f.label :name, 'User name' %>
+    <%= f.text_field(:name, class: 'form-control') %>
+  </p>
+  <p>
+    <%= f.label :nickname, 'User nickname' %>
+    <%= f.text_field(:nickname, class: 'form-control') %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field(:email, class: 'form-control') %>
+  </p>
+  <% unless registration_form %>
+    <p class="text-primary mt-5">
+      If you don't want to change your password, leave these following fields blank
+    </p>
+  <% end %>
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field(:password, class: 'form-control') %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field(:password_confirmation, class: 'form-control') %>
+  </p>
+  <p>
+    <%= f.submit submit_button_text, class: "btn btn-success" %>
+    <% unless registration_form %>
+      <span>or <%= link_to "Back", :back %></span>
+    <% end %>
+  </p>
+<% end %>

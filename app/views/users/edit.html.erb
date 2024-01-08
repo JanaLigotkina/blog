@@ -1,0 +1,11 @@
+<div class="col-md-6">
+  <h3>Edit profile</h3>
+  <%= render 'form', user: @user, registration_form: false, submit_button_text: 'Save changes' %>
+
+  <h3 class="mt-5">Delete profile</h3>
+  <%= button_to "Delete profile", user_path(@user),
+                method: :delete,
+                form:   { data: { turbo_confirm: "Are you sure?" } },
+                class:  "btn btn-danger"
+  %>
+</div>

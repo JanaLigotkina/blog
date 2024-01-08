@@ -7,15 +7,39 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to home_path, notice: 'User was successfully created!'
+      session[:user_id] = @user.id
+      redirect_to home_path, notice: 'You have successfully registered!'
     else
-      render 'new'
+      render 'new', notice: 'You have filled in the registration fields incorrectly!'
     end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      redirect_to home_path, notice: 'You have successfully edited your profile!'
+    else
+      render 'edit', notice: 'You have filled in the registration fields incorrectly!'
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    session.delete(:user_id)
+
+    redirect_to home_path, notice: 'You have successfully deleted your profile!'
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :nickname, :email, :password)
+    params.require(:user).permit(:name, :nickname, :email, :password, :password_confirmation)
   end
 end

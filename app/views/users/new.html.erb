@@ -1,32 +1,4 @@
 <h2>Registration</h2>
-
-<%= form_with(model: @user, url: users_path) do |f| %>
-  <% if @user.errors.any? %>
-    <% @user.errors.full_messages.each do |msg| %>
-      <div class="alert alert-danger">
-        <%= msg %>
-      </div>
-    <% end %>
-  <% end %>
-
-  <p>
-    <%= f.label :name, 'User name' %>
-    <%= f.text_field(:name, class: 'form-control') %>
-  </p>
-  <p>
-    <%= f.label :nickname, 'User nickname' %>
-    <%= f.text_field(:nickname, class: 'form-control') %>
-  </p>
-  <p>
-    <%= f.label :email, 'Email' %>
-    <%= f.text_field(:email, class: 'form-control') %>
-  </p>
-  <p>
-    <%= f.label :password, 'Password' %>
-    <%= f.password_field(:password, class: 'form-control') %>
-  </p>
-  <p>
-    <%= f.submit 'Registration', class: 'btn btn-success' %>
-  </p>
-<% end %>
-
+<div class="col-md-6">
+  <%= render 'form', user: @user, registration_form: true, submit_button_text: 'Registration' %>
+</div>
