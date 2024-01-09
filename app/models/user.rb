@@ -6,7 +6,8 @@ class User < ApplicationRecord
   validates :nickname, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/ }
 
-  has_many :posts, dependent: :nullify
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def downcase_nickname
     nickname.downcase!

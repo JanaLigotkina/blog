@@ -1,0 +1,11 @@
+<% comment_object = comment || post.comments.build %>
+<%= form_with(model: [post, comment_object], local: true) do |f| %>
+  <%= f.hidden_field :user_id %>
+  <p>
+    <%= f.label :body, 'Comment' %>
+    <%= f.text_area(:body, class: 'form-control') %>
+  </p>
+  <p>
+    <%= f.submit('Add comment', class: 'btn btn-warning') %>
+  </p>
+<% end %>
