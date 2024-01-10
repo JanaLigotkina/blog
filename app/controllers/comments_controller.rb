@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
+  before_action :set_post, only: [:create, :edit, :update, :destroy]
+  before_action :set_comment, only: [:edit, :update, :destroy]
   def create
-    @post    = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params.merge(user: current_user))
 
     if @comment.save
@@ -10,15 +11,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-    @post    = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
-  end
-
   def update
-    @post    = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
-
     if @comment.update(comment_params)
       redirect_to @post, notice: 'Comment was successfully updated.'
     else
@@ -27,9 +20,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @post    = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
-
     if @comment.destroy
       redirect_to @post, notice: 'Comment was successfully deleted.'
     else
@@ -41,5 +31,13 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:user_id, :body)
+  end
+
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
+
+  def set_comment
+    @comment = @post.comments.find(params[:id])
   end
 end

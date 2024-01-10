@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   def index
     @posts = Post.all
+    user_ids = @posts.pluck(:user_id).uniq
+    @users_with_posts = User.where(id: user_ids)
   end
 
   def new
@@ -20,8 +23,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-
     if @post.update(post_params)
       flash[:notice] = 'Post was successfully updated.'
       redirect_to @post
@@ -31,20 +32,10 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
-
-    if @post.nil?
-      redirect_to posts_path
-    end
-  end
-
-  def edit
-    @post = Post.find(params[:id])
+    redirect_to posts_path if @post.nil?
   end
 
   def destroy
-    @post = Post.find(params[:id])
-
     if @post.destroy
       flash[:notice] = 'Post was successfully deleted.'
       redirect_to posts_path
@@ -57,5 +48,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:user_id, :title, :body)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end

@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-  def index
-    @users = User.all
-  end
-  def new
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+ def new
     @user = User.new
   end
 
@@ -17,12 +15,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
+  def show
+    @posts = @user.posts
+    @post = Post.new(user: @user)
   end
 
   def update
-    @user = User.find(params[:id])
 
     if @user.update(user_params)
       redirect_to home_path, notice: 'You have successfully edited your profile!'
@@ -32,7 +30,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
 
     session.delete(:user_id)
@@ -40,15 +37,13 @@ class UsersController < ApplicationController
     redirect_to home_path, notice: 'You have successfully deleted your profile!'
   end
 
-  def show
-    @user = User.find(params[:id])
-    @posts = @user.posts
-    @post = Post.new(user: @user)
-  end
-
   private
 
   def user_params
     params.require(:user).permit(:name, :nickname, :email, :password, :password_confirmation)
+  end
+
+ def set_user
+    @user = User.find(params[:id])
   end
 end

@@ -14,7 +14,7 @@
         <% interesting_posts = @posts.sample(3) %>
         <% interesting_posts.each do |post| %>
           <div class="d-flex justify-content-between my-3">
-            <p><%= fa_icon('eye') %></p>
+            <p><%= fa_icon('book') %></p>
             <p><%= post.title %></p>
             <%= link_to "Read more..", post_path(post), class: 'btn btn-default' %>
           </div>
@@ -24,18 +24,15 @@
 
     <div class="p-3 my-5 post-bg">
       <h4 class="my-5">Most interesting people</h4>
-      <% users = User.all %>
-      <% users.each do |user| %>
-        <% if user.posts.count > 0 %>
-          <div class="d-flex justify-content-between my-3">
-            <p><%= fa_icon('eye') %></p>
-            <p><%= user.nickname %></p>
-            <p><%= "(статей: #{user.posts.count})" %></p>
-            <%= link_to "Read articles", user_path(user), class: 'btn btn-default' %>
+      <% @users_with_posts.each do |user| %>
+        <% if user.posts.present? %>
+          <div class="d-flex justify-content-around my-4">
+            <p><%= fa_icon('star') %></p>
+            <p><%= user.name %></p>
+            <%= link_to "Read posts", user_path(user), class: '' %>
           </div>
         <% end %>
       <% end %>
     </div>
   </div>
-
 </div>
