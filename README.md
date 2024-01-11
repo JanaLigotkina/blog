@@ -4,6 +4,15 @@
 
 This is a simple blog application build with Ruby on Rails and PostgreSQL.
 
+## Screenshots
+
+![image](app/assets/images/demo/home.png)
+![show user](app/assets/images/demo/show_user.png)
+![edit post](app/assets/images/demo/edit_profile.png)
+![show post](app/assets/images/demo/show_post.png)
+![new post](app/assets/images/demo/new_post.png)
+![registration](app/assets/images/demo/registration.png)
+
 ## Installation
 
 1. Clone the repository
