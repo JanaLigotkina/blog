@@ -7,23 +7,25 @@
 <div class="d-flex col-md-15 justify-content-md-between align-items-start">
   <%= render 'post', posts: @posts %>
 
-  <div class="col-md-4">
+  <div class="col-md-5">
     <div class="p-3 post-bg">
-      <h4 class="my-5">Most interesting posts</h4>
+      <h4 class="my-5 text-center">Most interesting posts</h4>
       <div class="d-flex flex-column">
         <% interesting_posts = @posts.sample(3) %>
         <% interesting_posts.each do |post| %>
-          <div class="d-flex justify-content-between my-3">
-            <p><%= fa_icon('book') %></p>
-            <p><%= post.title %></p>
-            <%= link_to "Read more..", post_path(post), class: 'btn btn-default' %>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex">
+              <p class="px-3"><%= fa_icon('book') %></p>
+              <p class="px-3"><%= post.title %></p>
+            </div>
+            <p><%= link_to "Read", post_path(post), class: 'btn btn-success' %></p>
           </div>
         <% end %>
       </div>
     </div>
 
     <div class="p-3 my-5 post-bg">
-      <h4 class="my-5">Most interesting people</h4>
+      <h4 class="my-5 text-center">Most interesting people</h4>
       <% @users_with_posts.each do |user| %>
         <% if user.posts.present? %>
           <div class="d-flex justify-content-around my-4">
